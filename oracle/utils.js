@@ -1,7 +1,5 @@
 const keccak256 = require('keccak256');
 const crypto = require('crypto');
-const TronWeb = require('tronweb');
-require('dotenv').config();
 
 function sleep(ms) {
   return new Promise((resolve) => {

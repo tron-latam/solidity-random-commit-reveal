@@ -10,26 +10,31 @@ async function pushSeed(contract) {
 }
 
 async function startProcess(contract, blocksToWait, tronWebJs) {
-  console.log('Running loop');
+  console.log('Starting Process...');
+  let tries = 0;
   while (true) {
-    let currentSource;
+    let currentSource = null;
     const seedSet = await contract.seedSet().call();
-    console.log(seedSet);
-    if (!seedSet) {
+    if (!seedSet || tries > 255) {
+      console.log('Setting new seed');
       currentSource = await pushSeed(contract);
+      await waitForBlocks(blocksToWait, tronWebJs);
+      await contract.publishNumber(currentSource).send({ shouldPollResponse: true });
+      const currentNumbers = await contract.getnumbers().call();
+      console.log('Current Numbers', currentNumbers);
+      // eslint-disable-next-line no-underscore-dangle
+      const bigNumber = tronWebJs.toBigNumber(currentNumbers[currentNumbers.length - 1]._hex);
+      console.log('Latest big number', bigNumber);
+    } else {
+      console.log('Seed is set, waiting...');
+      await waitForBlocks(blocksToWait, tronWebJs);
+      tries += blocksToWait;
     }
-    await waitForBlocks(blocksToWait, tronWebJs);
-    await contract.publishNumber(currentSource).send({ shouldPollResponse: true });
-    const currentNumbers = await contract.getnumbers().call();
-    console.log(currentNumbers);
-    // eslint-disable-next-line no-underscore-dangle
-    const bigNumber = tronWebJs.toBigNumber(currentNumbers[currentNumbers.length - 1]._hex);
-    console.log(bigNumber);
   }
 }
 
 async function init() {
-  console.log('Process Init');
+  console.log('Initializing...');
   const tronWebJs = new TronWeb({
     fullHost: process.env.ORACLE_FULL_HOST,
     privateKey: process.env.ORACLE_PRIVATE_KEY,

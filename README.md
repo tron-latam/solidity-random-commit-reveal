@@ -32,7 +32,7 @@ $ npm run tronbox-migrate
 
 ## Available Commands
 
-
+-  `npm run dev` - Runs Oracle that generates random number and compiles and hot-reloads UI for development.
 -  `npm run serve` - Compiles and hot-reloads for development.
 -  `npm run build` - Compiles and minifies for production
 -  `npm run lint` - Lints and fixes files.

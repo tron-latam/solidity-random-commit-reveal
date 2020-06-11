@@ -7,6 +7,7 @@
   "license": "MIT",
   "author": "Cryptouru <cryptouru@gmail.com>",
   "scripts": {
+    "dev": "node ./oracle/index.js & npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test": "npm run test:unit && npm run test:contracts",
