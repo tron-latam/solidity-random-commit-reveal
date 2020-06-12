@@ -37,7 +37,7 @@ contract Random {
         _numOracles++;
     }
 
-    function addOracle (address oracle) public {
+    function addOracle (address oracle) public onlyOwner {
         require(!_oracles.has(oracle), "Already an oracle!");
         _oracles.add(oracle);
         _numOracles++;
@@ -92,6 +92,10 @@ contract Random {
 
     function getnumbers() public view returns(uint[] memory){
         return  randomNumbers;
+    }
+
+    function getLatestRandomNumber() public view returns(uint[]){
+        return  randomNumbers[randomNumbers.length - 1];
     }
 
     function getRandomNumberCount() public view returns(uint){
