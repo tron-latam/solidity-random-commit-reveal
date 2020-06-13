@@ -1,7 +1,11 @@
 
 # solidity-random-commit-reveal
 
-> An example of a commit reveal scheme for pseudorandom numbers
+> An example of a commit reveal scheme for pseudorandom number generation
+
+## Introduction
+
+This is a project that intends to show a simple way to generate trustless pseudorandom numbers in Solidity. This is heavily inspired by this: https://github.com/fravoll/solidity-patterns/blob/master/docs/randomness.md and such pattern was followed on this implementation.
   
 ## Getting Started
 
@@ -18,9 +22,6 @@ The Shasta faucet is a great place to deploy test contracts and get you address 
 ```sh
 $ npm install
 ```
-**Copy rename .env.example into .env**
-After renaming the file replace the variables with the adequate test keys.
-
 **Compile contracts**
 ```sh
 $ npm run tronbox-compile
@@ -29,10 +30,13 @@ $ npm run tronbox-compile
 ```sh
 $ npm run tronbox-migrate
 ```
+**Copy rename .env.example into .env**
+After renaming the file replace the variables with the adequate test keys. Look for your contract address and your testing private keys
 
 ## Available Commands
 
 -  `npm run dev` - Runs Oracle that generates random number and compiles and hot-reloads UI for development.
+-  `npm run oracle` - Runs Oracle that generates random number.
 -  `npm run serve` - Compiles and hot-reloads for development.
 -  `npm run build` - Compiles and minifies for production
 -  `npm run lint` - Lints and fixes files.

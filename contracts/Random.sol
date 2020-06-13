@@ -94,7 +94,7 @@ contract Random {
         return  randomNumbers;
     }
 
-    function getLatestRandomNumber() public view returns(uint[]){
+    function getLatestRandomNumber() public view returns(uint){
         return  randomNumbers[randomNumbers.length - 1];
     }
 
@@ -140,8 +140,7 @@ contract Random {
         return _oracles.has(account);
     }
 
-    function hash(bytes32 toHash)
-        public pure returns (bytes32)
+    function hash(bytes32 toHash) public pure returns (bytes32)
     {
         return keccak256(abi.encodePacked(toHash));
     }

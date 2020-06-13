@@ -42,6 +42,7 @@ export default {
       this.numbers.push(stringNumber);
       if (i === length - 1) this.latestNumber = stringNumber;
     }
+    // Listen to new random numbers
     contract.NewRandomNumber().watch(async (err, event) => {
       if (err) {
         // Something went wrong
